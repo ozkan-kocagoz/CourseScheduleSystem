@@ -7,15 +7,13 @@ namespace CourseScheduleApi.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        // Veritabanýndaki 'users' tablosunu kod tarafýnda 'Users' olarak temsil et
         public DbSet<User> Users { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Veritabaný tablosunun adý küçük harfle 'users' olsun (PostgreSQL standardý)
-            modelBuilder.Entity<User>().ToTable("users");
 
-            // Sütun isimlerini de PostgreSQL formatýna (snake_case) uyduralým
+            modelBuilder.Entity<User>().ToTable("users");
             modelBuilder.Entity<User>().Property(u => u.Id).HasColumnName("id");
             modelBuilder.Entity<User>().Property(u => u.FullName).HasColumnName("full_name");
             modelBuilder.Entity<User>().Property(u => u.Email).HasColumnName("email");
@@ -23,6 +21,12 @@ namespace CourseScheduleApi.Data
             modelBuilder.Entity<User>().Property(u => u.Role).HasColumnName("role");
             modelBuilder.Entity<User>().Property(u => u.DepartmentId).HasColumnName("department_id");
             modelBuilder.Entity<User>().Property(u => u.CreatedAt).HasColumnName("created_at");
+
+
+            modelBuilder.Entity<Department>().ToTable("departments");
+            modelBuilder.Entity<Department>().Property(d => d.Id).HasColumnName("id");
+            modelBuilder.Entity<Department>().Property(d => d.Name).HasColumnName("name");
+            modelBuilder.Entity<Department>().Property(d => d.Code).HasColumnName("code");
         }
     }
 }
