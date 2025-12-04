@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Panel - Ders Programı</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <body class="dashboard-page">
+
+    <nav class="navbar">
+        <div class="logo">Ders Yönetim Sistemi</div>
+        <div class="user-info">
+            <span id="user-name">Yükleniyor...</span>
+            <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Çıkış</button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        
+        <div class="sidebar">
+            <ul>
+                <li onclick="showSection('home')" id="menu-home" class="active">
+                    <i class="fas fa-home"></i> Ana Sayfa
+                </li>
+                
+                <li onclick="showSection('users')" id="menu-users">
+                    <i class="fas fa-user-plus"></i> Kullanıcı İşlemleri
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="main-content">
+            
+            <div id="home-section">
+                <h1>Hoş Geldin!</h1>
+                <p>Genel durum özeti ve bölüm listesi aşağıdadır.</p>
+
+                <div class="cards">
+                    <div class="card">
+                        <h3>Toplam Bölüm</h3>
+                        <p class="count" id="dept-count">-</p>
+                    </div>
+                    <div class="card">
+                        <h3>Aktif Dönem</h3>
+                        <p>2025-2026 Güz</p>
+                    </div>
+                    <div class="card">
+                        <h3>Sistemdeki Kişi</h3>
+                        <p class="count" id="user-count">-</p>
+                    </div>
+                </div>
+
+                <div class="data-section">
+                    <h2>Bölüm Listesi</h2>
+                    <button onclick="loadDepartments()" class="action-btn">Listeyi Yenile</button>
+                    <ul id="course-list" style="margin-top:15px;">
+                        <li style="color:#666; font-style:italic;">Verileri görmek için butona basınız...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="users-section" style="display: none;">
+                <h1>Kullanıcı Yönetimi</h1>
+                <p>Sisteme yeni kullanıcı (Hoca, Bölüm Başkanı vb.)</p>
+
+                <div class="data-section" style="margin-top: 20px; border-top: 2px solid #eee; padding-top: 20px;">
+                    <h2>👤 Yeni Kullanıcı Ekle</h2>
+                    <div class="login-container" style="max-width: 100%; text-align: left; box-shadow: none; padding: 0; background: none;">
+                        
+                        <form onsubmit="handleRegister(event)">
+                            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                                <div style="flex:1;">
+                                    <label>Ad Soyad</label>
+                                    <input type="text" id="new-name" placeholder="Örn: Ahmet Yılmaz" style="margin:0;" required>
+                                </div>
+                                <div style="flex:1;">
+                                    <label>E-Posta Adresi</label>
+                                    <input type="email" id="new-email" placeholder="Örn: ahmet@uni.edu.tr" style="margin:0;" required>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 10px; align-items: flex-end;">
+                                <div style="flex:1;">
+                                    <label>Kullanıcı Rolü</label>
+                                    <select id="new-role" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; height: 42px;">
+                                        <option value="instructor">Öğretim Görevlisi</option>
+                                        <option value="department_rep">Bölüm Başkanı</option>
+                                        <option value="dean">Dekanlık</option>
+                                        <option value="admin">Sistem Yöneticisi</option>
+                                    </select>
+                                </div>
+                                <div style="flex:1;">
+                                    <button type="submit" style="margin: 0; height: 42px;">Kaydet ve Mail Gönder</button>
+                                </div>
+                            </div>
+                            
+                            <p id="register-message" style="margin-top: 15px; font-weight: bold; min-height: 20px;"></p>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
